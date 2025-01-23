@@ -1,6 +1,6 @@
 from sqlmodel import SQLModel, create_engine, text
 from core.config_DB import DB_CONFIG, base_url_connection, url_connection
-from models.db_models import User, Table, Table_User
+from models.db_models import User, Table
 
 def database_valide():
     base_engine = create_engine(base_url_connection)

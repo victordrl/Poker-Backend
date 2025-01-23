@@ -25,7 +25,3 @@ class Table(SQLModel, table = True):
     state: bool = Field(nullable = False, default = True)
     password: str = Field(default = '0')
     ciega: int = Field(default = 1)
-
-class Table_User(SQLModel, table = True):
-    user_id: int = Field(foreign_key = 'user.id', primary_key = True)
-    table_id: int = Field(foreign_key = 'table.id', primary_key = True)

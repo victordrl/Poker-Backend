@@ -1,6 +1,6 @@
 # user_services.py
 
-from sqlmodel import Session, select, and_
+from sqlmodel import Session, select, and_, desc
 from models.db_models import *
 from schemas.user_schemas import *
 
@@ -82,8 +82,27 @@ def get_user(db: Session, user_id: id):
     if not db_user:
         raise ValueError('usuario no encontrado')
 
-    return db_user
+    user_stat = UserStat(**db_user.__dict__)
+    
+    return user_stat
 
+def get_rank(db: Session):
+    query = select(User).order_by(desc(User.elo))
+    db_user = db.exec(query).all()
+    
+    if not db_user:
+        raise ValueError('no existen jugadores')
+    
+    user_info_list = [
+        UserInfo(
+            id=user.id, 
+            nick=user.nick, 
+            email=user.email, 
+            elo=user.elo
+        ) for user in db_user
+    ]
+    
+    return user_info_list
 
 def out_user(db: Session, user_id: int):
     query = select(User).where(User.id == user_id)

@@ -34,13 +34,22 @@ def login_user_controller(db: Session, user: UserBase):
     
 def get_user_controller(db: Session, user_id: int):
     try:
-        get_user(db, user_id)
-        return {'message': 'usuario encontrado', 'user': user_id}
+        result = get_user(db, user_id)
+        return {'message': 'usuario encontrado', 'user': result}
     except ValueError as e:
         raise HTTPException(status_code = status.HTTP_404_NOT_FOUND, detail = str(e))
     except Exception as e:
         raise HTTPException(status_code = status.HTTP_500_INTERNAL_SERVER_ERROR, detail = 'error interno')
     
+def get_users_rank_controller(db: Session):
+    try:
+        result = get_rank(db)
+        return {'message': 'ranking de usuarios', 'rank': result}
+    except ValueError as e:
+        raise HTTPException(status_code = status.HTTP_404_NOT_FOUND, detail = str(e))
+    except Exception as e:
+        raise HTTPException(status_code = status.HTTP_500_INTERNAL_SERVER_ERROR, detail = 'error interno')
+
 def delete_user_controller(db: Session, user_id: int):
     try:
         out_user(db, user_id)

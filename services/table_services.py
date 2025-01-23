@@ -59,7 +59,7 @@ def get_user_table(db: Session, table_code: str) -> Table_User:
         raise ValueError('mesa vacia')
     
 
-    id_list = Table_User_List(
+    id_list = Table_User(
         user_id = db_table,
         code = table_code
     )

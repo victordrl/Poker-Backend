@@ -27,6 +27,10 @@ def root_login_user(user: UserBase, db: Session = Depends(get_session)):
 def root_get_user(user_id: int, db: Session = Depends(get_session)):
     return get_user_controller(db = db, user_id = user_id)
 
+@router.get("/get_rank/")
+def root_get__user_rank(db: Session = Depends(get_session)):
+    return get_users_rank_controller(db = db)
+
 @router.delete("/out/{user_id}")
 def root_delete_user(user_id: int, db: Session = Depends(get_session)):
     return delete_user_controller(db =db, user_id = user_id)

@@ -17,7 +17,7 @@ class TableInfo(TableBase):
     password: str
     ciega: int
 
-class Table_User_List(TableBase):    
+class Table_User(TableBase):    
     user_id: List[int]
 
 

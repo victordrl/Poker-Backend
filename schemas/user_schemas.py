@@ -15,6 +15,7 @@ class UserInfo(BaseModel):
     id: int
     nick: str
     email: EmailStr
+    elo: int
 
 class UserStat(UserInfo):
     money: Optional[int] = None
