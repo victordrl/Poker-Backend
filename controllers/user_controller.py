@@ -14,7 +14,7 @@ def create_user_controller(db: Session, user: UserCreate):
     except Exception as e:
         raise HTTPException(status_code = status.HTTP_500_INTERNAL_SERVER_ERROR, detail = 'error interno')
 
-def update_user_controller(db: Session, user_update: UserStat):
+def update_user_controller(db: Session, user_update: UserUpdate):
     try:
         update_user(db, user_update)
         return {'message': 'usuario actualizado', 'user': user_update}

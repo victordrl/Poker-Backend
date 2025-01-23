@@ -16,7 +16,7 @@ def root_create_user(user: UserCreate, db: Session = Depends(get_session)):
     return create_user_controller(db = db, user = user)
 
 @router.post("/update/")
-def root_update_user(user: UserStat, db: Session = Depends(get_session)):
+def root_update_user(user: UserUpdate, db: Session = Depends(get_session)):
     return update_user_controller(db = db, user_update = user)
 
 @router.post("/log/")

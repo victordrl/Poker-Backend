@@ -29,7 +29,7 @@ def add_user(db: Session, user: UserCreate):
         db.rollback()
         raise ValueError(f'error add_user {e}')
     
-def update_user(db: Session, user_update: UserStat):
+def update_user(db: Session, user_update: UserUpdate):
     query = select(User).where(User.id == user_update.id)
     db_user = db.exec(query).first()
     
