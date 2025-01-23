@@ -47,24 +47,6 @@ def get_table(db: Session):
 
     return db_table
 
-def get_user_table(db: Session, table_code: str) -> Table_User:
-    query = (
-        select(Table_User.user_id)
-        .join(Table, Table_User.table_id == Table.id)
-        .where(Table.code == table_code)
-    )
-    db_table = db.exec(query).all()
-
-    if not db_table:
-        raise ValueError('mesa vacia')
-    
-
-    id_list = Table_User(
-        user_id = db_table,
-        code = table_code
-    )
-    return id_list
-
 def out_table(db: Session, table_code: str):
     query = select(Table).where(Table.code == table_code)
     db_table = db.exec(query).first()

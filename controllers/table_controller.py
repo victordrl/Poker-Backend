@@ -32,15 +32,6 @@ def get_table_controller(db: Session):
     except Exception as e:
         raise HTTPException(status_code = status.HTTP_500_INTERNAL_SERVER_ERROR, detail = 'error interno')
     
-def get_user_table_controller(db: Session, table_code: str):
-    try:
-        list_u_t = get_user_table(db, table_code)
-        return {'message': 'mesa encontrada', 'lista': list_u_t}
-    except ValueError as e:
-        raise HTTPException(status_code = status.HTTP_404_NOT_FOUND, detail = str(e))
-    except Exception as e:
-        raise HTTPException(status_code = status.HTTP_500_INTERNAL_SERVER_ERROR, detail = 'error interno')
-    
 def delete_table_controller(db: Session, table_code: str):
     try:
         out_table(db, table_code)
