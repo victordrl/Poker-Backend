@@ -68,7 +68,7 @@ def log_user(db: Session, user: UserBase):
     db_user = db.exec(query).first()
 
     if not db_user:
-        raise ValueError('usuario no encontrado')
+        raise ValueError('email password incorecto')
 
     # desenpaquetado del objeto user como parametros a userstat
     user_stat = UserStat(**db_user.__dict__)

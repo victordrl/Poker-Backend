@@ -22,7 +22,9 @@ class User(SQLModel, table = True):
 class Table(SQLModel, table = True):
     id: int | None = Field(default = None, primary_key = True)
     code: str = Field(nullable = False, unique = True, max_length = 5)
+    state: bool = Field(nullable = False, default = True)
     password: str = Field(default = '0')
+    ciega: int = Field(default = 1)
 
 class Table_User(SQLModel, table = True):
     user_id: int = Field(foreign_key = 'user.id', primary_key = True)
