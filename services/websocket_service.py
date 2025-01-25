@@ -13,7 +13,7 @@ class WebSocketManager:
             print({'message': 'connection denied', 'details':'user ya conectado', 'user': user_id})
             return
         
-        if len(self.connections) < 2:
+        if len(self.connections) < 8:
             await websocket.accept()
             self.connections[user_id] = websocket
             print({'message': 'connection succes', 'total conectados': len(self.connections), 'new user': user_id})
