@@ -5,6 +5,8 @@ from schemas.websocket_schemas import *
 
 manager = WebSocketManager()
 
+game = GameLoop()
+
 async def websocket_controller(websocket: WebSocket, user_id: int):
     try:
         await manager.connect(websocket, user_id)
@@ -12,8 +14,15 @@ async def websocket_controller(websocket: WebSocket, user_id: int):
         if user_id not in manager.connections:
             return
         
+        game.add_player(user_id)
+        
         while True:
-            message = await websocket.receive_text()
-            await websocket.send_text(f'mesaje recibido {message}')
+            game.start()
+            message = await websocket.receive_json()
+            if user_id == game.turn:
+                jugada = Jugada(**message)
+                game.update_jugada(user_id, jugada)
+                game.next_turn()
+
     except WebSocketDisconnect:
-        await manager.disconnect(user_id)
+        await manager.disconnect(user_id) 
